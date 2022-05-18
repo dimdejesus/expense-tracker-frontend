@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box } from "@mui/material";
+import { useEffect } from "react";
+import "./App.css";
+
+import Hidden from "@mui/material/Hidden";
+
+import Header from "./components/Header";
+import Body from "./components/Body";
+
+import useBackend from "./hooks/useBackend";
+import Space from "./components/utils/Space";
+import FabContainer from "./components/fab/FabContainer";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	useEffect(() => {
+		console.log("hello");
+	}, []);
+
+	return (
+		<Box sx={{ width: "80%", margin: "auto" }}>
+			<Header />
+			<Space />
+			<Body />
+			<Hidden smUp>
+				<FabContainer />
+			</Hidden>
+		</Box>
+	);
 }
 
 export default App;
