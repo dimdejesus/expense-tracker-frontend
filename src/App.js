@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import { useEffect } from "react";
-import "./App.css";
 
 import Hidden from "@mui/material/Hidden";
 
