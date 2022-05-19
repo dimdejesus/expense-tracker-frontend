@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 -   MUI - [MUI: The React component library you always wanted](https://mui.com/)
 -   React JS - [React – A JavaScript library for building user interfaces (reactjs.org)](https://reactjs.org/)
 
-## Libraries/Frameworks used
+## File Structure
 
 This is the File Structure of the app's src with their corresponding usage
 
