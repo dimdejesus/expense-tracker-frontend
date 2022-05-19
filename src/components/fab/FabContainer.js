@@ -1,10 +1,9 @@
 import { Box } from "@mui/material";
 import React from "react";
-import FabAdd from "./FabAdd";
 import FabMode from "./FabMode";
 
-//Holds the 2 Floating action button and float them to the bottom right
 //It will be used once the user is in mobile for convenience
+//In this case its the light and dark modes
 const FabContainer = () => {
 	return (
 		<Box
@@ -20,7 +19,6 @@ const FabContainer = () => {
 			}}
 		>
 			<FabMode />
-			<FabAdd />
 		</Box>
 	);
 };

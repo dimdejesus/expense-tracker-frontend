@@ -11,7 +11,7 @@ import { useThemeContext } from "../../hooks/useCustomContext";
 const FabMode = () => {
 	return (
 		<Fab
-			color={useThemeContext().mode === "dark" ? "error" : "success"}
+			color={useThemeContext().mode === "dark" ? "default" : "inherit"}
 			aria-label="mode"
 			onClick={useThemeContext().themeMode.toggleThemeMode}
 		>
