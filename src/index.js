@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import CssBaseline from "@mui/material/CssBaseline";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import { AlertProvider } from "./context/AlertContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -15,11 +17,13 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
 		<ThemeProvider>
-			<AlertProvider>
-				<CssBaseline>
-					<App />
-				</CssBaseline>
-			</AlertProvider>
+			<LocalizationProvider dateAdapter={AdapterDateFns}>
+				<AlertProvider>
+					<CssBaseline>
+						<App />
+					</CssBaseline>
+				</AlertProvider>
+			</LocalizationProvider>
 		</ThemeProvider>
 	</React.StrictMode>
 );
