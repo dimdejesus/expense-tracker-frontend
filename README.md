@@ -2,6 +2,36 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Libraries/Frameworks used
+
+-   MUI - [MUI: The React component library you always wanted](https://mui.com/)
+-   React JS - [React – A JavaScript library for building user interfaces (reactjs.org)](https://reactjs.org/)
+
+## Libraries/Frameworks used
+
+This is the File Structure of the app's src with their corresponding usage
+
+-   component - My Custom Components for reusability and organization
+-   context - My Collection of Context Files, where I setup a "global" variable
+-   hooks - Collection of Hooks to help me function more in React
+-   styles - my styles, in my case theme.js for MUI.
+-   utils - my constants or initialization
+-   App.js - the main page
+-   index.js - the main source or root.
+
+## How to set this up locally
+
+1.  Clone this repository
+    ```bash
+    git clone https://github.com/dimdejesus/expense-tracker-frontend.git
+    ```
+2.  create a .env variable (use .env.example as an example)
+3.  Before running this be sure to run first the expense-tracker-backend.
+4.  Run this web app
+    ```bash
+    npm run start
+    ```
+
 ## Available Scripts
 
 In the project directory, you can run:
