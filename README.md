@@ -26,8 +26,12 @@ This is the File Structure of the app's src with their corresponding usage
     git clone https://github.com/dimdejesus/expense-tracker-frontend.git
     ```
 2.  create a .env variable (use .env.example as an example)
-3.  Before running this be sure to run first the expense-tracker-backend.
-4.  Run this web app
+3.  Install the dependencies
+    ```bash
+    npm install
+    ```
+4.  Before running this be sure to run first the expense-tracker-backend.
+5.  Run this web app
     ```bash
     npm run start
     ```
