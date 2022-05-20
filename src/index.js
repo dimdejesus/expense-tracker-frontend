@@ -10,21 +10,24 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import { AlertProvider } from "./context/AlertContext";
 import { ThemeProvider } from "./context/ThemeContext";
+import { StorageProvider } from "./context/StorageContext";
 
 //theme and alert values became global by wrapping them on the App component.
 //CssBaseline is also needed for dark mode
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<ThemeProvider>
-			<LocalizationProvider dateAdapter={AdapterDateFns}>
-				<AlertProvider>
-					<CssBaseline>
-						<App />
-					</CssBaseline>
-				</AlertProvider>
-			</LocalizationProvider>
-		</ThemeProvider>
+		<StorageProvider>
+			<ThemeProvider>
+				<LocalizationProvider dateAdapter={AdapterDateFns}>
+					<AlertProvider>
+						<CssBaseline>
+							<App />
+						</CssBaseline>
+					</AlertProvider>
+				</LocalizationProvider>
+			</ThemeProvider>
+		</StorageProvider>
 	</React.StrictMode>
 );
 

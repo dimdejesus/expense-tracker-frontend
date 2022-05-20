@@ -3,8 +3,8 @@ import { Box, Modal, Stack, TextField, Typography } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Button } from "@mui/material";
 
-import useBackend from "../../hooks/useBackend";
 import { useAlertContext } from "../../hooks/useCustomContext";
+import { useStorageContext } from "../../hooks/useCustomContext";
 
 const style = {
 	position: "absolute",
@@ -19,23 +19,42 @@ const style = {
 };
 
 const ExpenseAdd = ({ modalOpen, handleClose }) => {
-	const { createExpenses } = useBackend(); //get the createExpenses in the backend to add expenses
 	const { triggerSuccess, triggerError } = useAlertContext(); //get the triggers for user visualization of happenings
+
+	const { setExpenses } = useStorageContext();
 
 	const [description, setDescription] = useState(""); //description textfield
 	const [date, setDate] = useState(null); //date textfield
 	const [amount, setAmount] = useState(0); //amount textfield
 
+	const [errors, setErrors] = useState({});
+
+	React.useEffect(() => {
+		if (!description) setErrors((prevError) => ({ ...prevError, description: "Required" }));
+		else setErrors((prevError) => ({ ...prevError, description: "" }));
+
+		if (new Date(date) > new Date())
+			setErrors((prevError) => ({ ...prevError, date: "Must be on or before" }));
+		else setErrors((prevError) => ({ ...prevError, date: "" }));
+
+		if (amount < 1)
+			setErrors((prevError) => ({ ...prevError, amount: "Must not be 0 or below" }));
+		else setErrors((prevError) => ({ ...prevError, amount: "" }));
+	}, [description, date, amount]);
+
 	//this is where it will go once the user clicks the Submit button.
 	const submitForm = (e) => {
 		e.preventDefault();
 
-		//A promis based where the adding of expenses to the backend is happening
-		createExpenses(description, date, amount)
-			.then((response) => {
-				triggerSuccess(response.message);
-			})
-			.catch((error) => triggerError(error.message));
+		try {
+			setExpenses((oldExpenses) => [
+				...oldExpenses,
+				{ id: oldExpenses.length + 1, description, date, amount },
+			]);
+			triggerSuccess(`${description} has been added to expenses`);
+		} catch (error) {
+			triggerError(error.message);
+		}
 
 		//set the values to default values
 		setDescription("");
@@ -63,8 +82,9 @@ const ExpenseAdd = ({ modalOpen, handleClose }) => {
 							label="Description"
 							name="description"
 							onChange={(e) => setDescription(e.target.value)}
+							error={errors.description ? true : false}
+							helperText={errors.description ? errors.description : null}
 							value={description}
-							required
 						/>
 
 						<DatePicker
@@ -72,7 +92,13 @@ const ExpenseAdd = ({ modalOpen, handleClose }) => {
 							name="date"
 							onChange={(newValue) => setDate(newValue)}
 							value={date}
-							renderInput={(params) => <TextField {...params} required />}
+							renderInput={(params) => (
+								<TextField
+									{...params}
+									error={errors.date ? true : false}
+									helperText={errors.date ? errors.date : null}
+								/>
+							)}
 						/>
 
 						<TextField
@@ -81,7 +107,8 @@ const ExpenseAdd = ({ modalOpen, handleClose }) => {
 							name="amount"
 							onChange={(e) => setAmount(+e.target.value)}
 							value={amount}
-							required
+							error={errors.amount ? true : false}
+							helperText={errors.amount ? errors.amount : null}
 						/>
 						<Button variant="contained" type="submit">
 							Submit

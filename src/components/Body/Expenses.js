@@ -1,20 +1,17 @@
 import { Button, Grid, Stack, TextField, Typography } from "@mui/material";
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState } from "react";
 import ExpenseCard from "./ExpenseCard";
 
 import useModal from "../../hooks/useModal";
 import ExpenseAdd from "./ExpenseAdd";
 
 //The main page for expenses
-const Expenses = ({ expenses: rawExpenses, useForm }) => {
+const Expenses = ({ expenses, useForm }) => {
 	//description search query
 	const [query, setQuery] = useState("");
 
 	//A hook used for controlling the modal
 	const { modalOpen, handleOpen, handleClose } = useModal();
-
-	//useMemo was used to avoid unecessary rendering
-	const expenses = useMemo(() => rawExpenses, [rawExpenses, query]);
 
 	//filter first before mapping the expenses, this is for searching purposes
 	function search(items) {
@@ -42,7 +39,7 @@ const Expenses = ({ expenses: rawExpenses, useForm }) => {
 				</Stack>
 				<Grid item container spacing={2} justifyContent="stretch">
 					{search(expenses).map(({ id, description, date, amount }) => (
-						<Grid item xs={12} lg={6} key={id}>
+						<Grid key={id} item xs={12} lg={6}>
 							<ExpenseCard
 								id={id}
 								description={description}

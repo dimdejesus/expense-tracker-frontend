@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Stack from "@mui/material/Stack";
 
@@ -64,13 +64,17 @@ const ExpenseWeekForm = ({ expenses }) => {
 						<Typography variant="body1">Check</Typography>
 					</Button>
 
-					{expensesPerWeek.length > 0
-						? expensesPerWeek.map((expenses, index) => (
-								<Typography key={index}>
-									Week {index}: {`₱${expenses.toFixed(2)}`}
-								</Typography>
-						  ))
-						: null}
+					{expensesPerWeek.length > 0 ? (
+						<Grid container spacing={1} direction="column">
+							{expensesPerWeek.map((expenses, index) => (
+								<Grid item key={index}>
+									<Typography>
+										Week {index + 1}: {`₱${expenses.toFixed(2)}`}
+									</Typography>
+								</Grid>
+							))}
+						</Grid>
+					) : null}
 				</Stack>
 			</form>
 		</Box>

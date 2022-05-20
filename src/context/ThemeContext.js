@@ -14,7 +14,7 @@ export function ThemeProvider({ children }) {
 	const themeMode = useMemo(
 		() => ({
 			toggleThemeMode: () => {
-				setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+				setMode((prevModeHere) => (prevModeHere === "light" ? "dark" : "light"));
 			},
 		}),
 		[]
